@@ -117,9 +117,9 @@ Req.prototype._send = function () {
     var opts = {
         scheme: protocol.replace(/:$/, ''),
         method: this.method,
-        host: u.hostname,
+        host: u.hostname||this.options.hostname,
         port: Number(u.port) || (protocol === 'https:' ? 443 : 80),
-        path: u.path,
+        path: u.path||this.options.path,
         agent: this.options.agent || false,
         headers: headers,
         withCredentials: this.options.withCredentials,
