@@ -91,7 +91,7 @@ hyperquest['delete'] = function (uri, opts, cb) {
 
 function Req (opts) {
     this.headers = opts.headers || {};
-    
+    this.lookup=opts.lookup||null
     var method = (opts.method || 'GET').toUpperCase();
     this.method = method;
     this.duplex = !(method === 'GET' || method === 'HEAD');
@@ -125,6 +125,9 @@ Req.prototype._send = function () {
         withCredentials: this.options.withCredentials,
         localAddress: this.options.localAddress
     };
+    if(this.options.lookup){
+    opts.lookup=this.options.lookup
+    }
     if (protocol === 'https:') {
         opts.pfx = this.options.pfx;
         opts.key = this.options.key;
